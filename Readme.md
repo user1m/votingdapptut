@@ -17,7 +17,7 @@ In this tutorial you'g breifly get familiar with the following technologies:
 
 * [Writing a contract](#writing-a-contract)
 * [Run TestRPC](#run-testrpc)
-* [Deploying a contract locally](#seploying-a-contract-locally)
+* [Deploying a contract locally](#deploying-a-contract-locally)
 * [Building the UI](#building-the-ui)
 * [Connnecting it all together](#connnecting-it-all-together)
 

@@ -1,8 +1,8 @@
-# Building a simple Voting DApp manually
+# Tutorial: Building a simple Voting DApp manually
 
 This tutorial is adapted from [this tutorial](https://medium.com/@mvmurthy/full-stack-hello-world-voting-ethereum-dapp-tutorial-part-1-40d2d0d807c2) by [Mahesh Murthy](https://medium.com/@mvmurthy)
 
-The goal is to give you a basic understanding of what frameworks like [Truffle](http://truffleframework.com/) are doing under the hood to deploy contracts and let you interact with them.
+#### The goal is to give you a basic understanding of what frameworks like [Truffle](http://truffleframework.com/) are doing under the hood to deploy contracts and let you interact with them.
 
 * To be clear, truffle is not covered in this tutorial. Check out [Mahesh's other tutorial](https://medium.com/@mvmurthy/full-stack-hello-world-voting-ethereum-dapp-tutorial-part-2-30b3d335aa1f).
 

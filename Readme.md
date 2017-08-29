@@ -14,6 +14,8 @@ This tutorial is adapted from [this tutorial](https://medium.com/@mvmurthy/full-
 * [solc](https://github.com/ethereum/solc-js) - JS bindings for the Solidity compiler
 * [testrpc](https://github.com/ethereumjs/testrpc) - An in memory ethereum blockchain simulator
 
+**NOTE:** All of the code for this tutorial is included in this repo.
+
 **NOTE: I highly recommend copying the code found in this tutorial line by line in order to understand exactly what each line of code does. That's why I've split the code the way I did, in more modular chunks.**
 
 ## Table of Contents:

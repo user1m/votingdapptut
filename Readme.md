@@ -6,14 +6,15 @@ The goal is to give you a basic understanding of what frameworks like [Truffle](
 
 * To be clear, truffle is not covered in this tutorial. Check out [Mahesh's other tutorial](https://medium.com/@mvmurthy/full-stack-hello-world-voting-ethereum-dapp-tutorial-part-2-30b3d335aa1f).
 
-In this tutorial you'll briefly get familiar with the following technologies:
+### In this tutorial you'll briefly get familiar with the following technologies:
 
 * [web3JS](https://github.com/ethereum/web3.js/) - Javascript API that allows you to interact with the Ethereum blockchain
 * [solc](https://github.com/ethereum/solc-js) - JS bindings for the Solidity compiler
 * [testrpc](https://github.com/ethereumjs/testrpc) - An in memory ethereum blockchain simulator
 
+**NOTE: I highly recommend copying the code found in this tutorial line by line in order to understand exactly what each line of code does. That's why I've split the code the way I did, in more modular chunks.**
 
-### Table of Contents:
+## Table of Contents:
 
 * [Writing a contract](#writing-a-contract)
 * [Run TestRPC](#run-testrpc)
@@ -22,12 +23,11 @@ In this tutorial you'll briefly get familiar with the following technologies:
 * [Connecting it all together](#connecting-it-all-together)
 
 
-
 ## Writing a contract
 * Create a project directory
 * `npm init` a `package.json`
 * Install some npm dependencies
-* Create the file `Voting.sol` and open it in your favorite text editor
+* Create a file called `Voting.sol` and open it in [your favorite text editor](https://code.visualstudio.com/)
 
 ```sh
 > mkdir votingdapp
@@ -36,10 +36,9 @@ In this tutorial you'll briefly get familiar with the following technologies:
 > npm install -g ethereumjs-testrpc http-server
 > npm install solc web3@0.20.1 --save
 > touch Voting.sol
-> vi Voting.sol
 ```
 
-* Copy the code below, in order, into `Voting.sol`
+* Copy the code below, in order, into `Voting.sol`. Comments inline:
 
 ```js
 pragma solidity ^0.4.11;
@@ -115,9 +114,9 @@ contract Voting {
 
 
 
-* Create the file `deployContract.js`
+* Create a file called `deployContract.js`
 * Open `deployContract.js` in your text editor
-* Copy the code below, in order (comments inline):
+* Copy the code below, in order. Comments inline:
 
 ```js
 var solc = require("solc"); // import the solidity compiler
@@ -133,7 +132,7 @@ console.log(web3.eth.accounts);
 ```
 
 ```js
-//compile the contract, load the code from Voting.sol in to a string variable and compile it.
+//compile the contract - load the code from Voting.sol in to a string variable and compile it.
 var code = fs.readFileSync("Voting.sol").toString();
 var compiledCode = solc.compile(code);
 
@@ -142,34 +141,33 @@ console.log(compiledCode);
 ```
 
 ```js
-//grab the bytecode from Voting.sol compiled. This is the code which will be deployed to the blockchain.
+//grab the bytecode from Voting.sol compiled - This is the code which will be deployed to the blockchain.
 var byteCode = compiledCode.contracts[":Voting"].bytecode;
 console.log("\n------------ LOGGING BYTECODE -------------\n");
 console.log(byteCode);
 ```
 
 ```js
-//grab the contract interface, called the Application Binary Interface (ABI), which tells the contract user what methods are available in the contract.
+//grab the contract interface, called the Application Binary Interface (ABI), which tells the user what methods are available in the contract.
 var abi = compiledCode.contracts[":Voting"].interface;
 console.log("\n------------ LOGGING Application Binary Interface (ABI) -------------\n");
 console.log(abi);
 ```
 
 ```js
-//parse the abi into a JS object
+//parse the abi string into a JS object
 var abiDefinition = JSON.parse(abi);
 
-//deploy the contract: You first create a contract object which is used to deploy and initiate contracts in the blockchain.
-var VotingContract = web3.eth.contract(abiDefinition);
+//deploy the contract: 
 
-//When you have to interact with your contract, you will need this deployed address and abi definition (More below)
-var contractAddress;
+//1. You first create a contract object which is used to deploy and initiate contracts in the blockchain.
+var VotingContract = web3.eth.contract(abiDefinition);
 
 var contractInstance;
 ```
 
 ```js
-//VotingContract.new below deploys the contract to the blockchain.
+//2. VotingContract.new below deploys the contract to the blockchain.
 
 //The first parameter is contract constructor parameters. We pass in our 3 candidates (an array of bytes32 as defined in our contract constructor
 //Note: if our contract tool more parameters, they be listed in order following the first parameter
@@ -199,24 +197,25 @@ var deployedContract = VotingContract.new(
 ```js
                 console.log("Contract mined! Address: " + contract.address);
                 console.log("\n------------ LOGGING Deployed Contract  -------------\n");
+                //NOTE: When you have to interact with your contract, you will need this deployed address and abi definition (More below)
                 console.log(contract);
 ```
 
 ```js
-                contractAddress = contract.address;
                 console.log("\n------------ LOGGING Contract Address -------------\n");
-                console.log(contractAddress);
+                console.log(contract.address);
 ```
 
 ```js
                 //get the instance of the contract at this address
-                contractInstance = VotingContract.at(contractAddress);
+                contractInstance = VotingContract.at(contract.address);
 ```
 
 ```js
-                //execute a contract function on the blockchain
+                //execute contract functions on the blockchain
                 console.log("\n------------ LOGGING Executing contract calls -------------\n");
                 console.log("Votes for Rama before: ");
+                //totalVotesFor() is a function in our contract
                 console.log(contractInstance.totalVotesFor.call("Rama").valueOf());
 
                 //execute a transaction. The transaction id (output) is the proof that this transaction occurred and you can refer back to this at any time in the future. This transaction is immutable.
@@ -232,7 +231,7 @@ var deployedContract = VotingContract.new(
                 fs.writeFile("./contract.json",
                     JSON.stringify(
                     {
-                        address: contractAddress,
+                        address: contract.address,
                         abi: JSON.stringify(abiDefinition, null, 2)
                     },
                     null,
@@ -317,7 +316,7 @@ var deployedContract = VotingContract.new(
 </html>
 ```
 
-* **Note**: The first script tag is a link to web3, then jquery, then our index.js (coming up next)
+* **Note**: The first script tag is a link to web3 (gives us access to web3 on the client browser), then jquery, then our index.js (coming up next)
 
 ## Connecting it all together
 
@@ -388,7 +387,7 @@ window.onload = function() {
 ## Run it
 
 * **Note**: Make sure `testrpc` is still running
-* Run `npm start` - This will deploy the contract to `testrpc` and start a web-server
+* Run `npm start` in the terminal - This will deploy the contract to `testrpc` and start a web-server
 * Visit the url indicated by `http-server` (likely `http://localist:8080`)
 
 ![alt text](images/vote1.png "View 1")

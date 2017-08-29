@@ -4,9 +4,9 @@ This tutorial is adapted from [this tutorial](https://medium.com/@mvmurthy/full-
 
 The goal is to give you a basic understanding of what frameworks like [Truffle](http://truffleframework.com/) are doing under the hood to deploy contracts and let you interact with them.
 
-* To be clear, tuffle is not covered in this tutorial. Check out [Mahesh's other tutorial](https://medium.com/@mvmurthy/full-stack-hello-world-voting-ethereum-dapp-tutorial-part-2-30b3d335aa1f).
+* To be clear, truffle is not covered in this tutorial. Check out [Mahesh's other tutorial](https://medium.com/@mvmurthy/full-stack-hello-world-voting-ethereum-dapp-tutorial-part-2-30b3d335aa1f).
 
-In this tutorial you'g breifly get familiar with the following technologies:
+In this tutorial you'll briefly get familiar with the following technologies:
 
 * [web3JS](https://github.com/ethereum/web3.js/) - Javascript API that allows you to interact with the Ethereum blockchain
 * [solc](https://github.com/ethereum/solc-js) - JS bindings for the Solidity compiler
@@ -19,14 +19,14 @@ In this tutorial you'g breifly get familiar with the following technologies:
 * [Run TestRPC](#run-testrpc)
 * [Deploying a contract locally](#deploying-a-contract-locally)
 * [Building the UI](#building-the-ui)
-* [Connnecting it all together](#connnecting-it-all-together)
+* [Connecting it all together](#connecting-it-all-together)
 
 
 
 ## Writing a contract
 * Create a project directory
 * `npm init` a `package.json`
-* Install some npm dependecies
+* Install some npm dependencies
 * Create the file `Voting.sol` and open it in your favorite text editor
 
 ```sh
@@ -172,7 +172,7 @@ var contractInstance;
 //VotingContract.new below deploys the contract to the blockchain.
 
 //The first parameter is contract constructor parameters. We pass in our 3 candidates (an array of bytes32 as defined in our contract constructor
-//Note: if our contract tool more parameters, they be listed in order following the first paramter
+//Note: if our contract tool more parameters, they be listed in order following the first parameter
 
 //The next parameter is the info needed to actually deploy the contract:
 //data: This is the compiled bytecode that we deploy to the blockchain
@@ -319,7 +319,7 @@ var deployedContract = VotingContract.new(
 
 * **Note**: The first script tag is a link to web3, then jquery, then our index.js (coming up next)
 
-## Connnecting it all together
+## Connecting it all together
 
 * Create an `index.js` file
 * Copy the code below, in order, into it (comments inline):
@@ -355,7 +355,7 @@ window.onload = function() {
             );
         };
 
-        //after we have an instance of the contract update the inital canidate votes
+        //after we have an instance of the contract update the initial candidate votes
         //recall that during deploying the contract we updated votes for Rama to 1
         for (var i = 0; i < candidateNames.length; i++) {
             let name = candidateNames[i];
@@ -374,7 +374,7 @@ window.onload = function() {
 
     var candidateNames = Object.keys(candidates);
 
-    //initialize canidate votes to 0 until we have an instance of the contract instance
+    //initialize candidate votes to 0 until we have an instance of the contract instance
     $(document).ready(function(event) {
         for (var i = 0; i < candidateNames.length; i++) {
             let name = candidateNames[i];
@@ -387,8 +387,8 @@ window.onload = function() {
 
 ## Run it
 
-* **Note**: Make sure `testrpc` is still runnning
-* Run `npm start` - This will deploy the contract to `testrpc` and start a webserver
+* **Note**: Make sure `testrpc` is still running
+* Run `npm start` - This will deploy the contract to `testrpc` and start a web-server
 * Visit the url indicated by `http-server` (likely `http://localist:8080`)
 
 ![alt text](images/vote1.png "View 1")

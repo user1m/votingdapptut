@@ -92,7 +92,7 @@ contract Voting {
 
 ## Run TestRPC
 
-* In the terminal run: 
+* In the terminal run:
 
 ```sh
 > testrpc
@@ -162,11 +162,11 @@ var contractInstance;
 ```
 
 ```js
-//VotingContract.new below deploys the contract to the blockchain. 
+//VotingContract.new below deploys the contract to the blockchain.
 
 //The first parameter is contract constructor parameters. We pass in our 3 candidates (an array of bytes32 as defined in our contract constructor
 //Note: if our contract tool more parameters, they be listed in order following the first paramter
- 
+
 //The next parameter is the info needed to actually deploy the contract:
 //data: This is the compiled bytecode that we deploy to the blockchain
 //from: The blockchain has to keep track of who deployed the contract. In this case, we are just picking the first account. In the live blockchain, you can not just use any account. You have to own that account and unlock it before transacting. You are asked for a passphrase while creating an account and that is what you use to prove your ownership of that account. Testrpc by default unlocks all the 10 accounts for convenience.
@@ -188,40 +188,40 @@ var deployedContract = VotingContract.new(
         console.log("Contract transaction send: TransactionHash: " + contract.transactionHash + " waiting to be mined...\n");
       } else {
 ```
-      
+
 ```js
         console.log("Contract mined! Address: " + contract.address);
         console.log("\n------------ LOGGING Deployed Contract  -------------\n");
         console.log(contract);
 ```
 
-```js        
+```js
         contractAddress = contract.address;
         console.log("\n------------ LOGGING Contract Address -------------\n");
         console.log(contractAddress);
 ```
 
 ```js
-		//get the instance of the contract at this address
+        //get the instance of the contract at this address
         contractInstance = VotingContract.at(contractAddress);
 ```
 
 ```js
         //execute a contract function on the blockchain
         console.log("\n------------ LOGGING Executing contract calls -------------\n");
-		console.log("Votes for Rama before: ");
-		console.log(contractInstance.totalVotesFor.call("Rama").valueOf());
-        
+        console.log("Votes for Rama before: ");
+        console.log(contractInstance.totalVotesFor.call("Rama").valueOf());
+
         //execute a transaction. The transaction id (output) is the proof that this transaction occurred and you can refer back to this at any time in the future. This transaction is immutable.
         console.log(contractInstance.voteForCandidate("Rama", {from: web3.eth.accounts[0]}));
 
-		//votes for Rama should go up by 1
-		console.log("Votes for Rama after: ");
-		console.log(contractInstance.totalVotesFor.call("Rama").valueOf());
+        //votes for Rama should go up by 1
+        console.log("Votes for Rama after: ");
+        console.log(contractInstance.totalVotesFor.call("Rama").valueOf());
 ```
 
 ```js
-		//write the contract address and abi to file for client side JS to use to interact with contract
+		    //write the contract address and abi to file for client side JS to use to interact with contract
         fs.writeFile("./contract.json",
           JSON.stringify(
             {
@@ -324,57 +324,57 @@ window.onload = function() {
 ```
 
 ```js
-	//initialize web3
-  var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-  var contractInstance;
+    //initialize web3
+    var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+    var contractInstance;
 ```
 
 ```js
-	//load the json file we wrote to earlier
-  $.getJSON("./contract.json", function(contract) {
+    //load the json file we wrote to earlier
+    $.getJSON("./contract.json", function(contract) {
 
-	//get the instance of our contract using the (1) address and (2) abi as discussed earlier
-	//we will always need these 2 to interact with a deployed contract instance
-    contractInstance = web3.eth.contract(JSON.parse(contract.abi)).at(contract.address);
+        //get the instance of our contract using the (1) address and (2) abi as discussed earlier
+        //we will always need these 2 to interact with a deployed contract instance
+        contractInstance = web3.eth.contract(JSON.parse(contract.abi)).at(contract.address);
 
-	//on the vote button click, execute this function on the contract. 
-	//from: sign the transaction by using the first account
-    window.voteForCandidate = function() {
-      candidateName = $("#candidate").val();
-      contractInstance.voteForCandidate(candidateName, {from: web3.eth.accounts[0]},
-        function() {
-          let div_id = candidates[candidateName];
-          $("#" + div_id).html(contractInstance.totalVotesFor.call(candidateName).toString());
+        //on the vote button click, execute this function on the contract.
+        //from: sign the transaction by using the first account
+        window.voteForCandidate = function() {
+            candidateName = $("#candidate").val();
+            contractInstance.voteForCandidate(candidateName, {from: web3.eth.accounts[0]},
+                function() {
+                    let div_id = candidates[candidateName];
+                    $("#" + div_id).html(contractInstance.totalVotesFor.call(candidateName).toString());
+                }
+            );
+        };
+
+        //after we have an instance of the contract update the inital canidate votes
+        //recall that during deploying the contract we updated votes for Rama to 1
+        for (var i = 0; i < candidateNames.length; i++) {
+            let name = candidateNames[i];
+            let val = contractInstance.totalVotesFor.call(name).toString();
+            $("#" + candidates[name]).html(val);
         }
-      );
+    });
+```
+
+```js
+    var candidates = {
+        Rama: "candidate-1",
+        Nick: "candidate-2",
+        Claudius: "candidate-3"
     };
 
-	//after we have an instance of the contract update the inital canidate votes
-	//recall that during deploying the contract we updated votes for Rama to 1
-    for (var i = 0; i < candidateNames.length; i++) {
-      let name = candidateNames[i];
-      let val = contractInstance.totalVotesFor.call(name).toString();
-      $("#" + candidates[name]).html(val);
-    }
-  });
-```
+    var candidateNames = Object.keys(candidates);
 
-```js
-  var candidates = {
-    Rama: "candidate-1",
-    Nick: "candidate-2",
-    Claudius: "candidate-3"
-  };
-
-  var candidateNames = Object.keys(candidates);
-  
-	//initialize canidate votes to 0 until we have an instance of the contract instance
-  $(document).ready(function(event) {
-    for (var i = 0; i < candidateNames.length; i++) {
-      let name = candidateNames[i];
-      $("#" + candidates[name]).html(0);
-    }
-  });
+    //initialize canidate votes to 0 until we have an instance of the contract instance
+    $(document).ready(function(event) {
+        for (var i = 0; i < candidateNames.length; i++) {
+            let name = candidateNames[i];
+            $("#" + candidates[name]).html(0);
+        }
+    });
 };
 
 ```

@@ -44,7 +44,9 @@ In this tutorial you'g breifly get familiar with the following technologies:
 ```js
 pragma solidity ^0.4.11;
 // specifies what version of compiler this code will be compiled with
+```
 
+```js
 contract Voting {
   /* the mapping field below is equivalent to an associative array or hash.
   */
@@ -64,7 +66,9 @@ contract Voting {
   function Voting(bytes32[] candidateNames) {
     candidateList = candidateNames;
   }
+```
 
+```js
   // This function returns the total votes a candidate has received so far
   function totalVotesFor(bytes32 candidate) returns (uint8) {
     assert(validCandidate(candidate) == true);
@@ -101,6 +105,9 @@ contract Voting {
 * This will start an in memory blockchain simulator for us to play with.
 * TESTRPC initializes with 10 wallets and their private keys
 * Do not close this terminal session. Keep it running in the background. This is our blockchain.
+
+![alt text](images/testrpc.png "TestRPC output")
+
 * **Note**: testrpc is running on `localhost:8545`
 
 
@@ -378,14 +385,17 @@ window.onload = function() {
 
 ```
 
-
 ## Run it
 
 * **Note**: Make sure `testrpc` is still runnning
 * Run `npm start` - This will deploy the contract to `testrpc` and start a webserver
 * Visit the url indicated by `http-server` (likely `http://localist:8080`)
 
+![alt text](images/vote1.png "View 1")
+![alt text](images/vote2.png "View 2")
 
+### Congratulations!
+You've built an application that can interact with the blockchain! You saw how to write a smart contract, deploy said contract, and call contract functions. That's all we're going to cover in this but I hope this gave you a better sense for building DApps.
 
 ## Authors
 

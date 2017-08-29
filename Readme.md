@@ -221,7 +221,7 @@ var deployedContract = VotingContract.new(
 ```
 
 ```js
-		    //write the contract address and abi to file for client side JS to use to interact with contract
+		//write the contract address and abi to file for client side JS to use to interact with contract
         fs.writeFile("./contract.json",
           JSON.stringify(
             {
@@ -252,7 +252,7 @@ var deployedContract = VotingContract.new(
 
 * Update scripts in`package.json` to below
 
-```
+```json
 "scripts": {
     "start": "node deployContract.js && http-server .",
     "test": "echo \"Error: no test specified\" && exit 1"

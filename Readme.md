@@ -39,6 +39,7 @@ This tutorial is adapted from [this tutorial](https://medium.com/@mvmurthy/full-
 > npm install solc web3@0.20.1 --save
 > touch Voting.sol
 ```
+* **Note:** Make sure to install `web3 version 0.20.1` since at the time of this writing `npm install web3` is defaulted to a beta version that isn't as stable.
 
 * Copy the code below, in order, into `Voting.sol`. Comments inline:
 

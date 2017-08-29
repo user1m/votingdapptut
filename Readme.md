@@ -175,77 +175,76 @@ var contractInstance;
 //The final parameter is a callback function. After the contract is deployed this function will be called with either an error or our contract instance
 
 var deployedContract = VotingContract.new(
-  ["Rama", "Nick", "Claudius"],
-  {
-    data: byteCode,
-    from: web3.eth.accounts[0],
-    gas: 4700000
-  },
-  function(e, contract) {
-    if (!e) {
-      if (!contract.address) {
-        console.log("\n------------ Contract waiting to be mined -------------\n");
-        console.log("Contract transaction send: TransactionHash: " + contract.transactionHash + " waiting to be mined...\n");
-      } else {
-```
-
-```js
-        console.log("Contract mined! Address: " + contract.address);
-        console.log("\n------------ LOGGING Deployed Contract  -------------\n");
-        console.log(contract);
-```
-
-```js
-        contractAddress = contract.address;
-        console.log("\n------------ LOGGING Contract Address -------------\n");
-        console.log(contractAddress);
-```
-
-```js
-        //get the instance of the contract at this address
-        contractInstance = VotingContract.at(contractAddress);
-```
-
-```js
-        //execute a contract function on the blockchain
-        console.log("\n------------ LOGGING Executing contract calls -------------\n");
-        console.log("Votes for Rama before: ");
-        console.log(contractInstance.totalVotesFor.call("Rama").valueOf());
-
-        //execute a transaction. The transaction id (output) is the proof that this transaction occurred and you can refer back to this at any time in the future. This transaction is immutable.
-        console.log(contractInstance.voteForCandidate("Rama", {from: web3.eth.accounts[0]}));
-
-        //votes for Rama should go up by 1
-        console.log("Votes for Rama after: ");
-        console.log(contractInstance.totalVotesFor.call("Rama").valueOf());
-```
-
-```js
-		//write the contract address and abi to file for client side JS to use to interact with contract
-        fs.writeFile("./contract.json",
-          JSON.stringify(
-            {
-              address: contractAddress,
-              abi: JSON.stringify(abiDefinition, null, 2)
-            },
-            null,
-            2
-          ),
-          "utf-8",
-          function(err) {
-            if (err) {
-              console.log("ERROR: ");
-              console.log(err);
+    ["Rama", "Nick", "Claudius"],
+    {
+        data: byteCode,
+        from: web3.eth.accounts[0],
+        gas: 4700000
+    },
+    function(e, contract) {
+        if (!e) {
+            if (!contract.address) {
+                console.log("\n------------ Contract waiting to be mined -------------\n");
+                console.log("Contract transaction send: TransactionHash: " + contract.transactionHash + " waiting to be mined...\n");
             } else {
-              console.log(`The file ./contract.json was saved!`);
+```
+
+```js
+                console.log("Contract mined! Address: " + contract.address);
+                console.log("\n------------ LOGGING Deployed Contract  -------------\n");
+                console.log(contract);
+```
+
+```js
+                contractAddress = contract.address;
+                console.log("\n------------ LOGGING Contract Address -------------\n");
+                console.log(contractAddress);
+```
+
+```js
+                //get the instance of the contract at this address
+                contractInstance = VotingContract.at(contractAddress);
+```
+
+```js
+                //execute a contract function on the blockchain
+                console.log("\n------------ LOGGING Executing contract calls -------------\n");
+                console.log("Votes for Rama before: ");
+                console.log(contractInstance.totalVotesFor.call("Rama").valueOf());
+
+                //execute a transaction. The transaction id (output) is the proof that this transaction occurred and you can refer back to this at any time in the future. This transaction is immutable.
+                console.log(contractInstance.voteForCandidate("Rama", {from: web3.eth.accounts[0]}));
+
+                //votes for Rama should go up by 1
+                console.log("Votes for Rama after: ");
+                console.log(contractInstance.totalVotesFor.call("Rama").valueOf());
+```
+
+```js
+                //write the contract address and abi to file for client side JS to use to interact with contract
+                fs.writeFile("./contract.json",
+                    JSON.stringify(
+                    {
+                        address: contractAddress,
+                        abi: JSON.stringify(abiDefinition, null, 2)
+                    },
+                    null,
+                    2),
+                    "utf-8",
+                    function(err) {
+                            if (err) {
+                                console.log("ERROR: ");
+                                console.log(err);
+                            } else {
+                                console.log(`The file ./contract.json was saved!`);
+                            }
+                    }
+                );
             }
-          }
-        );
-      }
-    } else {
-      console.log(e);
+        } else {
+            console.log(e);
+        }
     }
-  }
 );
 ```
 

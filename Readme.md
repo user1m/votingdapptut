@@ -393,6 +393,8 @@ window.onload = function() {
 
 * **Note**: Make sure `testrpc` is still running
 * Run `npm start` in the terminal - This will deploy the contract to `testrpc` and start a web-server
+	* You should notice some console logs being outputted to the terminal
+	* Additionally, checkout the `contract.json` file created as you deployed the contract
 * Visit the url indicated by `http-server` (likely `http://localist:8080`)
 
 ![alt text](images/vote1.png "View 1")

@@ -1,0 +1,16 @@
+{
+  "name": "votingdapptut",
+  "version": "1.0.0",
+  "description": "sample voting dapp",
+  "main": "index.js",
+  "scripts": {
+    "start": "node deployContract.js && http-server .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Claudius Mbemba",
+  "license": "ISC",
+  "dependencies": {
+    "solc": "^0.4.16",
+    "web3": "^0.20.1"
+  }
+}

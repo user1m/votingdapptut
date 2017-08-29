@@ -39,7 +39,7 @@ In this tutorial you'll briefly get familiar with the following technologies:
 > vi Voting.sol
 ```
 
-* Copy the code below into `Voting.sol`
+* Copy the code below, in order, into `Voting.sol`
 
 ```js
 pragma solidity ^0.4.11;

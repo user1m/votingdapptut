@@ -89,9 +89,11 @@ var deployedContract = VotingContract.new(
         console.log(contractInstance.totalVotesFor.call("Rama").valueOf());
 
         //execute a transaction. The transaction id (output) is the proof that this transaction occurred and you can refer back to this at any time in the future. This transaction is immutable.
-        contractInstance.voteForCandidate("Rama", {
-          from: web3.eth.accounts[0]
-        });
+        console.log(
+          contractInstance.voteForCandidate("Rama", {
+            from: web3.eth.accounts[0]
+          })
+        );
 
         //votes for Rama should go up by 1
         console.log("Votes for Rama after: ");

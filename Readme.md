@@ -163,7 +163,7 @@ console.log(abi);
 //parse the abi string into a JS object
 var abiDefinition = JSON.parse(abi);
 
-//deploy the contract: 
+//deploy the contract:
 
 //1. You first create a contract object which is used to deploy and initiate contracts in the blockchain.
 var VotingContract = web3.eth.contract(abiDefinition);
@@ -395,7 +395,7 @@ window.onload = function() {
 * Run `npm start` in the terminal - This will deploy the contract to `testrpc` and start a web-server
 	* You should notice some console logs being outputted to the terminal
 	* Additionally, checkout the `contract.json` file created as you deployed the contract
-* Visit the url indicated by `http-server` (likely `http://localist:8080`)
+* Visit the url indicated by `http-server` (likely `http://localhost:8080`)
 
 ![alt text](images/vote1.png "View 1")
 ![alt text](images/vote2.png "View 2")

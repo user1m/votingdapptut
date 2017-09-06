@@ -18,6 +18,10 @@ This tutorial is adapted from [this tutorial](https://medium.com/@mvmurthy/full-
 
 **NOTE: I highly recommend copying the code found in this tutorial line by line in order to understand exactly what each line of code does. That's why I've split the code the way I did, in more modular chunks.**
 
+## Prerequisites
+* [NodeJS](https://nodejs.org/en/download/)
+* `npm` - installed with node
+
 ## Table of Contents:
 
 * [Writing a contract](#writing-a-contract)

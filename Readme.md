@@ -21,6 +21,7 @@ This tutorial is adapted from [this tutorial](https://medium.com/@mvmurthy/full-
 ## Prerequisites
 * [NodeJS](https://nodejs.org/en/download/)
 * `npm` - installed with node
+* [VSCode](https://code.visualstudio.com/)
 
 ## Table of Contents:
 

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node deployContract.js && http-server .",
+    "start1": "http-server .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Claudius Mbemba",

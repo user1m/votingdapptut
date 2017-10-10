@@ -126,4 +126,4 @@ var Contract = module.exports = {
   }
 };
 
-Contract.deploy();
+// Contract.deploy();

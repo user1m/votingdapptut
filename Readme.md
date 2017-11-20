@@ -1,5 +1,8 @@
 # Tutorial: Building a simple Voting DApp manually
 
+### ***If you like this project, give it a [![GitHub stars](https://img.shields.io/github/stars/user1m/votingdapptut.svg?style=social&label=Star)](https://github.com/user1m/votingdapptut).  If you find issues, [create an issue](https://github.com/user1m/votingdapptut/issues).***
+
+
 #### Estimated Time: 20mins
 
 This tutorial is adapted from [this tutorial](https://medium.com/@mvmurthy/full-stack-hello-world-voting-ethereum-dapp-tutorial-part-1-40d2d0d807c2) by [Mahesh Murthy](https://medium.com/@mvmurthy)

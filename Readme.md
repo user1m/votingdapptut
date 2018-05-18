@@ -75,26 +75,26 @@ contract Voting {
   deploy the contract to the blockchain. When we deploy the contract,
   we will pass an array of candidates who will be contesting in the election
   */
-  function Voting(bytes32[] candidateNames) {
+  constructor(bytes32[] candidateNames) public {
     candidateList = candidateNames;
   }
 ```
 
 ```js
   // This function returns the total votes a candidate has received so far
-  function totalVotesFor(bytes32 candidate) returns (uint8) {
+  function totalVotesFor(bytes32 candidate) public view returns (uint8) {
     assert(validCandidate(candidate) == true);
     return votesReceived[candidate];
   }
 
   // This function increments the vote count for the specified candidate. This
   // is equivalent to casting a vote
-  function voteForCandidate(bytes32 candidate) {
+  function voteForCandidate(bytes32 candidate) public {
     assert(validCandidate(candidate) == true);
     votesReceived[candidate] += 1;
   }
 
-  function validCandidate(bytes32 candidate) returns (bool) {
+  function validCandidate(bytes32 candidate) public view returns (bool) {
     for(uint i = 0; i < candidateList.length; i++) {
       if (candidateList[i] == candidate) {
         return true;

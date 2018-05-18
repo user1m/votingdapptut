@@ -15,7 +15,7 @@ This tutorial is adapted from [this tutorial](https://medium.com/@mvmurthy/full-
 
 * [web3JS](https://github.com/ethereum/web3.js/) - Javascript API that allows you to interact with the Ethereum blockchain
 * [solc](https://github.com/ethereum/solc-js) - JS bindings for the Solidity compiler
-* [testrpc](https://github.com/ethereumjs/testrpc) - An in memory ethereum blockchain simulator
+* [ganache-cli](https://github.com/trufflesuite/ganache-cli) - An in memory ethereum blockchain simulator
 
 **NOTE:** All of the code for this tutorial is included in this repo.
 
@@ -29,7 +29,7 @@ This tutorial is adapted from [this tutorial](https://medium.com/@mvmurthy/full-
 ## Table of Contents:
 
 * [Writing a contract](#writing-a-contract)
-* [Run TestRPC](#run-testrpc)
+* [Run Ganache-cli](#run-ganache-cli)
 * [Deploying a contract locally](#deploying-a-contract-locally)
 * [Building the UI](#building-the-ui)
 * [Connecting it all together](#connecting-it-all-together)
@@ -106,21 +106,21 @@ contract Voting {
 ```
 
 
-## Run TestRPC
+## Run Ganache-cli
 
 * In the terminal run:
 
 ```sh
-> testrpc
+> ganache-cli
 ```
 
 * This will start an in memory blockchain simulator for us to play with.
-* TESTRPC initializes with 10 wallets and their private keys
+* Ganache-cli initializes with 10 wallets and their private keys
 * Do not close this terminal session. Keep it running in the background. This is our blockchain.
 
-![alt text](images/testrpc.png "TestRPC output")
+![alt text](images/testrpc.png "Ganache CLI output")
 
-* **Note**: testrpc is running on `localhost:8545`
+* **Note**: ganache-cli is running on `localhost:8545`
 
 
 ## Deploying a contract locally
@@ -135,7 +135,7 @@ contract Voting {
 var solc = require("solc"); // import the solidity compiler
 var Web3 = require("web3"); // import web3
 var fs = require("fs");  //import the file system module
-var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545")); //initialize the web3 object to listen on the port testrpc is running on - so we can communicate with the blockchain
+var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545")); //initialize the web3 object to listen on the port ganache-cli is running on - so we can communicate with the blockchain
 ```
 
 ```js
@@ -187,7 +187,7 @@ var contractInstance;
 
 //The next parameter is the info needed to actually deploy the contract:
 //data: This is the compiled bytecode that we deploy to the blockchain
-//from: The blockchain has to keep track of who deployed the contract. In this case, we are just picking the first account. In the live blockchain, you can not just use any account. You have to own that account and unlock it before transacting. You are asked for a passphrase while creating an account and that is what you use to prove your ownership of that account. Testrpc by default unlocks all the 10 accounts for convenience.
+//from: The blockchain has to keep track of who deployed the contract. In this case, we are just picking the first account. In the live blockchain, you can not just use any account. You have to own that account and unlock it before transacting. You are asked for a passphrase while creating an account and that is what you use to prove your ownership of that account. Ganache-cli by default unlocks all the 10 accounts for convenience.
 //gas: It costs money to interact with the blockchain. This money goes to miners who do all the work to include your code in the blockchain. You have to specify how much money you are willing to pay to get your code included in the blockchain and you do that by setting the value of ‘gas’. The ether balance in your ‘from’ account will be used to buy gas. The price of gas is set by the network. The amount of gas it takes to execute a transaction or deployment is calculated by the operations in the contract / function being executed.
 
 //The final parameter is a callback function. After the contract is deployed this function will be called with either an error or our contract instance
@@ -399,8 +399,8 @@ window.onload = function() {
 
 ## Run it
 
-* **Note**: Make sure `testrpc` is still running
-* Run `npm start` in the terminal - This will deploy the contract to `testrpc` and start a web-server
+* **Note**: Make sure `ganache-cli` is still running
+* Run `npm start` in the terminal - This will deploy the contract to `ganache-cli` and start a web-server
 	* You should notice some console logs being outputted to the terminal
 	* Additionally, checkout the `contract.json` file created as you deployed the contract
 * Visit the url indicated by `http-server` (likely `http://localhost:8080`)

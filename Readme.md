@@ -45,11 +45,11 @@ This tutorial is adapted from [this tutorial](https://medium.com/@mvmurthy/full-
 > mkdir votingdapp
 > cd votingdapp
 > npm init
-> npm install -g ethereumjs-testrpc http-server
-> npm install solc web3@0.20.1 --save
+> npm install -g ganache-cli http-server
+> npm install solc web3@0.20.6 --save
 > touch Voting.sol
 ```
-* **Note:** Make sure to install `web3 version 0.20.1` since at the time of this writing `npm install web3` is defaulted to a beta version that isn't as stable.
+* **Note:** Make sure to install `web3 version 0.20.6` since at the time of this writing `npm install web3` is defaulted to a beta version that isn't as stable.
 
 * Copy the code below, in order, into `Voting.sol`. Comments inline:
 
